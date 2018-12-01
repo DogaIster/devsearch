@@ -2,91 +2,104 @@
 
 <html lang="en">
 <head>
-  <base href="./">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <link rel="shortcut icon" type="img/ico" href="src/img/favicon.ico"/>
-  <!-- Icons-->
-  <link href="node_modules/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
-  <link href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
-  <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
-  <!-- Main styles for this application-->
-  <link href="css/style.css" rel="stylesheet">
-  <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
-  <!-- Global site tag (gtag.js) - Google Analytics-->
-  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    // Shared ID
-    gtag('config', 'UA-118965717-3');
-    // Bootstrap ID
-    gtag('config', 'UA-118965717-5');
-  </script>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="shortcut icon" type="img/ico" href="src/img/favicon.ico"/>
+    <!-- Icons-->
+    <link href="node_modules/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+    <link href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <!-- Main styles for this application-->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
 </head>
+
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
 <header class="app-header navbar">
-  <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand" href="#">
-    <img class="navbar-brand-full" src="img/brand/logo.png" width="245" height="85" alt="DevSearch Logo">
-    <img class="navbar-brand-minimized" src="img/brand/dsicon.png" width="50" height="55" alt="DevSearch Logo">
-  </a>
+    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">
+        <img class="navbar-brand-full" src="img/brand/logo.png" width="245" height="85" alt="DevSearch Logo">
+        <img class="navbar-brand-minimized" src="img/brand/dsicon.png" width="50" height="55" alt="DevSearch Logo">
+    </a>
 </header>
+
 <div class="app-body">
-  <div class="sidebar">
-    <nav class="sidebar-nav">
-      <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="nav-icon icon-home"></i> Home
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="history.html">
-            <i class="nav-icon icon-menu"></i> History</a>
-        </li>
-      </ul>
-    </nav>
-    <button class="sidebar-minimizer brand-minimizer" type="button"></button>
-  </div>
-  <main class="main">
-    <!-- Search button animation -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-
-    <div class="search">
-      <input type="search" class="search-box" />
-      <span class="search-button">
-     <span class="search-icon"></span>
-   </span>
+    <div class="sidebar">
+        <nav class="sidebar-nav">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="nav-icon icon-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="history.html">
+                        <i class="nav-icon icon-menu"></i> History</a>
+                </li>
+            </ul>
+        </nav>
+        <button class="sidebar-minimizer brand-minimizer" type="button"></button>
     </div>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <main class="main">
+        <form action="/" method="post">
+            <input type="search" id="search5"/>
+        </form>
 
+        <div id="main_container"></div>
+    </main>
 
-    <script  src="index.js"></script>
-
-    </body>
-  </main>
+    <script>
+        document.getElementById("search5").addEventListener("change", search);
+        function search() {
+            console.log("running");
+            let search_query = document.getElementById("search5").value;
+            let api_url = "https://api.github.com/search/repositories?q=" + search_query;
+            fetch(api_url).then(function (response) {
+                if (response.status !== 200) {
+                    console.log("Error: " + response.status);
+                    return;
+                }
+                response.json().then(function (data) {
+                    document.getElementById("main_container").innerHTML = "";
+                    let results = data.items;
+                    for (let i = 0; i < results.length; i++) {
+                        let d = document.createElement("div");
+                        let obj = "<div>";
+                        obj += `<a href="${results[i].html_url}"> ${results[i].name}</a>`;
+                        obj += `<p>Stars: ${results[i].stargazers_count}</p>`;
+                        obj += `<p>Language: ${results[i].language}</p>`;
+                        if (results[i].license !== null) {
+                            obj += `License: ${results[i].license.name}`
+                        } else {
+                            obj += `License: No License`;
+                        }
+                        d.innerHTML = obj;
+                        document.getElementById("main_container").appendChild(d);
+                    }
+                });
+            });
+        }
+    </script>
 
 </div>
+</body>
+
 <footer class="app-footer">
-  <div>
-    <a href="">DevSearch</a>
-    <span>&copy; 2018 DevSearch.</span>
-  </div>
-  <div class="ml-auto">
-    <span>Powered by</span>
-    <a href="">DevSearch</a>
-  </div>
+    <div>
+        <a href="">DevSearch</a>
+        <span>&copy; 2018 DevSearch.</span>
+    </div>
+    <div class="ml-auto">
+        <span>Powered by</span>
+        <a href="">DevSearch</a>
+    </div>
 </footer>
+
 <!-- CoreUI and necessary plugins-->
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 
@@ -100,4 +113,3 @@
 <script src="node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js"></script>
 <script src="js/main.js"></script>
 </html>
-
