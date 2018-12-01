@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<!--
-* CoreUI - Free Bootstrap Admin Template
-* @version v2.1.10
-* @link https://coreui.io
-* Copyright (c) 2018 creativeLabs Łukasz Holeczek
-* Licensed under MIT (https://coreui.io/license)
--->
 
 <html lang="en">
   <head>
@@ -13,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="shortcut icon" type="img/ico" href="src/img/favicon.ico"/>
     <!-- Icons-->
     <link href="node_modules/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
     <link href="node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
@@ -23,7 +17,22 @@
     <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics-->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
-     <style>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      // Shared ID
+      gtag('config', 'UA-118965717-3');
+      // Bootstrap ID
+      gtag('config', 'UA-118965717-5');
+    </script>
+  </head>
+  <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+    <header class="app-header navbar">
+      <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+      <style>
       /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
       body{
   background:#555;
@@ -55,41 +64,11 @@
 
 
     </style>
-
-</head>
-
-<body>
-
-      <div id="search5back">
-
-    <form method="get" action="/search" id="searchbox5">
-        <input id="search5" name="q" type="text" size="40" placeholder="Search..." />
-    </form>
-
-   
-   
-                
-    </div>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      // Shared ID
-      gtag('config', 'UA-118965717-3');
-      // Bootstrap ID
-      gtag('config', 'UA-118965717-5');
-    </script>
-  </head>
-  <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
-    <header class="app-header navbar">
-      <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#">
         <img class="navbar-brand-full" src="img/brand/logo.png" width="245" height="85" alt="DevSearch Logo">
-        <img class="navbar-brand-minimized" src="img/brand/sygnet.png" width="50" height="55" alt="DevSearch Logo">
+        <img class="navbar-brand-minimized" src="img/brand/dsicon.png" width="50" height="55" alt="DevSearch Logo">
       </a>
     </header>
     <div class="app-body">
@@ -110,11 +89,7 @@
         <button class="sidebar-minimizer brand-minimizer" type="button"></button>
       </div>
       <main class="main">
-        <!-- Breadcrumb-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
-        </ol>
-
+       
       </main>
 
     </div>
@@ -139,5 +114,4 @@
     <script src="node_modules/chart.js/dist/Chart.min.js"></script>
     <script src="node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js"></script>
     <script src="js/main.js"></script>
-  </body>
 </html>
