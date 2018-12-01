@@ -551,6 +551,11 @@ pre code {
   word-break: normal;
 }
 
+.repository{
+  width: 80%;
+  margin: 0 auto;
+}
+
 .pre-scrollable {
   max-height: 340px;
   overflow-y: scroll;
