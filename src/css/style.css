@@ -11099,7 +11099,7 @@ canvas {
 }
 
 .dropdown-header .btn:hover {
-  color: #23282c;
+  color: #23282a;
 }
 
 .dropdown-header .btn.pull-right {
@@ -11112,14 +11112,19 @@ canvas {
 
 .app-header .navbar-nav .dropdown-menu {
   position: absolute;
+  background-color: #2f353a;
+
 }
 
 .app-header .navbar-nav .dropdown-menu-right {
+  background-color: #2f353a;
   right: 0;
   left: auto;
 }
 
 .app-header .navbar-nav .dropdown-menu-left {
+  background-color: #2f353a;
+
   right: auto;
   left: 0;
 }
