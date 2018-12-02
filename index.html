@@ -32,6 +32,8 @@
             padding: 12px 20px 12px 40px;
             -webkit-transition: width 0.4s ease-in-out;
             transition: width 0.4s ease-in-out;
+            margin-bottom: 20px;
+            margin-left: 5px;
         }
 
         input[type=text]:focus {
@@ -77,8 +79,8 @@
     <script>
         document.getElementById("search5").addEventListener("change", search);
         function search() {
-            console.log("running");
             let search_query = document.getElementById("search5").value;
+
             let api_url = "https://api.github.com/search/repositories?q=" + search_query;
             fetch(api_url).then(function (response) {
                 if (response.status !== 200) {
@@ -90,16 +92,21 @@
                     let results = data.items;
                     for (let i = 0; i < results.length; i++) {
                         let d = document.createElement("div");
-                        let obj = "<div>";
-                        obj += `<a href="${results[i].html_url}"> ${results[i].name}</a>`;
-                        obj += `<p>Stars: ${results[i].stargazers_count}</p>`;
-                        obj += `<p>Language: ${results[i].language}</p>`;
+                        let h = `
+                           <a href="${results[i].html_url}" class="repo">
+                               <div class="repo-container">
+                                   <p class="repo-name">${results[i].name}</p>
+                                   <p class="repo-stars">Stars: ${results[i].stargazers_count}</p>
+                                   <p class="repo-lang">Language: ${results[i].language}</p>
+                       `;
                         if (results[i].license !== null) {
-                            obj += `License: ${results[i].license.name}`
+                            h += `<p class="repo-license">License: ${results[i].license.name}</p>`;
                         } else {
-                            obj += `License: No License`;
+                            h += `<p class="repo-license">License: No License</p>`;
                         }
-                        d.innerHTML = obj;
+                        h += `</div></a>`;
+                        d.innerHTML = h;
+                        d.classList.add("repo-wrapper");
                         document.getElementById("main_container").appendChild(d);
                     }
                 });

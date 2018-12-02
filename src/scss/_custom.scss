@@ -1,1 +1,32 @@
 // Here you can add other styles
+#main_container{
+  background-color:white;
+}
+
+.main{
+  background-color:white;
+}
+  .repo{
+    color: white;
+    &-name{
+      margin: 0 auto;
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+    }
+    &-wrapper{
+      width: 85%;
+      height: 150px;
+      margin: 0 auto;
+    }
+    &-container{
+      background-color: #2f353a;
+      box-shadow: 1px 1px 2px black;
+      border-radius: 4px;
+    }
+  }
+
+.repo:hover{
+  color: white;
+  text-decoration: none;
+}
